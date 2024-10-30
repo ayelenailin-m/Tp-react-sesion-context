@@ -21,7 +21,8 @@ export const SessionProvider = ({ children }) => {
       const data = await response.json();
   
       if (response.ok) {
-        setUser(data);  // Almacena los datos del usuario en el contexto
+    // almacenar la información del usuario en el contexto
+      setUser(data.user.username);
       } else {
         throw new Error(data.message || 'Error en la autenticación');
       }

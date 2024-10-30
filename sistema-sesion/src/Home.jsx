@@ -6,7 +6,7 @@ const Home = () => {
 
   return (
     <div>
-      <h2>Bienvenido, {user ? user.name : 'Usuario'}</h2>
+      <h2>Bienvenido, {user ? user: 'Usuario'}</h2>
       <button onClick={logout}>Cerrar Sesión</button>
     </div>
   );

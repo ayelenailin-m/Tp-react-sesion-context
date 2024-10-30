@@ -5,7 +5,7 @@ import Home from './Home';
 
 const App = () => {
   const { user } = useSession();
-  console.log(user)
+  
 
   return (
     <div>
