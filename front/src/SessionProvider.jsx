@@ -5,29 +5,27 @@ const SessionContext = createContext();
 export const SessionProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const login = async (credentials) => {
     setLoading(true);
+    setError(null); 
     try {
       const response = await fetch("http://localhost:4000/auth/sign-in", {
         method: "POST",
-        credentials: "include", // Esto es importante para enviar las cookies de sesión
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: credentials.username, 
-          password: credentials.password,
-        }),
+        body: JSON.stringify(credentials),
       });
       const data = await response.json();
   
       if (response.ok) {
-    // almacenar la información del usuario en el contexto
-      setUser(data.user.username);
+        setUser(data.user.username);
       } else {
         throw new Error(data.message || 'Error en la autenticación');
       }
     } catch (error) {
-      alert(error.message);
+      setError(error.message);  
     } finally {
       setLoading(false);
     }
@@ -39,7 +37,7 @@ export const SessionProvider = ({ children }) => {
   };
 
   return (
-    <SessionContext.Provider value={{ user, loading, login, logout }}>
+    <SessionContext.Provider value={{ user, loading, error, login, logout }}>
       {children}
     </SessionContext.Provider>
   );
