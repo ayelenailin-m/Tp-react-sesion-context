@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSession } from './SessionProvider'; // Asegúrate de que la extensión sea .jsx
+import { useSession } from './SessionProvider';
 import Login from './Login';
 import Home from './Home';
 
